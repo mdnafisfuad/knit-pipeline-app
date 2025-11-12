@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knit Process Optimization</title>
+    <!-- Use a relative path for Vercel deployment -->
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>ML Based Knit Process Optimization</h1>
+            <nav class="tabs">
+                <button class="tab-button active" onclick="showTab('order')">1. Order</button>
+                <button class="tab-button" onclick="showTab('knitting')">2. Knitting</button>
+                <button class="tab-button" onclick="showTab('dyeing')">3. Dyeing</button>
+                <button class="tab-button" onclick="showTab('stenter')">4. Stenter</button>
+                <button class="tab-button" onclick="showTab('compactor')">5. Compaction</button>
+                <button class="tab-button" onclick="showTab('feedback')">6. Feedback</button>
+                <button class="tab-button" onclick="showTab('history')">History</button>
+            </nav>
+        </header>
+
+        <main>
+            <!-- STAGE 1: ORDER (Fixed Algorithm) -->
+            <div id="order" class="tab-content active">
+                <form id="order-form" class="process-form">
+                    <div class="inputs">
+                        <h3>Inputs</h3>
+                        <label>Batch No. <input type="text" id="order-batch-no" required></label>
+                        <label>Required GSM <input type="number" step="any" id="order-req-gsm" required></label>
+                        <label>Required Dia <input type="number" step="any" id="order-req-dia" required></label>
+                        <label>Weight Increase Factor (%) <input type="number" step="any" id="order-weight-increase" value="15" required></label>
+                        <label>Length Increase Factor (%) <input type="number" step="any" id="order-length-increase" value="-20" required></label>
+                    </div>
+                    <div class="suggestions">
+                        <h3>Suggestions</h3>
+                        <label>Gray GSM <input type="text" id="order-sugg-gray-gsm" readonly></label>
+                        <label>Gray Dia <input type="text" id="order-sugg-gray-dia" readonly></label>
+                    </div>
+                </form>
+                <div class="button-container">
+                    <button class="predict-button" onclick="runPrediction('order')">Get Suggestions</button>
+                    <button class="next-button" id="order-next-btn" style="display: none;" onclick="goToNextTab('order')">Next &gt;</button>
+                </div>
+            </div>
+
+            <!-- DYNAMIC ML STAGES (Placeholders) -->
+            <div id="knitting" class="tab-content"></div>
+            <div id="stenter" class="tab-content"></div>
+            <div id="compactor" class="tab-content"></div>
+
+            <!-- STAGE 3: DYEING (Fixed Algorithm) -->
+            <div id="dyeing" class="tab-content">
+                 <form id="dyeing-form" class="process-form">
+                    <div class="inputs">
+                        <h3>Inputs</h3>
+                        <label>Produced Gray GSM <input type="number" step="any" id="dyeing-produced-gray-gsm" required></label>
+                        <label>Produced Gray Dia <input type="number" step="any" id="dyeing-produced-gray-dia" required></label>
+                        <label>Shade % <input type="number" step="any" id="dyeing-shade-percent" required></label>
+                        <label>Enzyme % <input type="number" step="any" id="dyeing-enzyme-percent" required></label>
+                    </div>
+                    <div class="suggestions">
+                        <h3>Suggestions</h3>
+                        <label>Dyed GSM <input type="text" id="dyeing-sugg-dyed-gsm" readonly></label>
+                        <label>Dyed Dia <input type="text" id="dyeing-sugg-dyed-dia" readonly></label>
+                    </div>
+                </form>
+                 <div class="button-container">
+                    <button class="predict-button" onclick="runPrediction('dyeing')">Get Suggestions</button>
+                    <button class="next-button" id="dyeing-next-btn" style="display: none;" onclick="goToNextTab('dyeing')">Next &gt;</button>
+                </div>
+            </div>
+            
+            <!-- FEEDBACK & HISTORY (Fixed) -->
+            <div id="feedback" class="tab-content">
+                <form id="feedback-form" class="process-form single-column">
+                    <div class="inputs"><h3>Final Produced Values</h3><p>Enter the final measurements to complete the record for this batch.</p><label>Batch No. <input type="text" id="feedback-batch-no" readonly></label><label>Finished GSM <input type="number" id="feedback-finished-gsm" required></label><label>Finished Dia <input type="number" id="feedback-finished-dia" required></label></div>
+                </form>
+                 <button class="predict-button" onclick="submitFeedback()">Save Feedback</button>
+            </div>
+            <div id="history" class="tab-content">
+                <h3>Process History</h3><div class="history-table-container"><table id="history-table"><thead></thead><tbody></tbody></table></div>
+            </div>
+        </main>
+    </div>
+    <div id="loader" class="loader-overlay" style="display: none;"><div class="loader-spinner"></div></div>
+    <!-- Use a relative path for Vercel deployment -->
+    <script src="static/script.js"></script>
+</body>
+</html>
