@@ -1,12 +1,8 @@
-# This flag tells pip to ADD the PyTorch CPU index as a source,
-# without removing the main PyPI package index.
 --extra-index-url https://download.pytorch.org/whl/cpu
-
-# Now, pip can find torch in the extra index, and all other
-# packages in the main index.
 torch
 Flask
 pandas
 scikit-learn
 numpy
 flask-cors
+requests  # <-- ADD THIS LINE
