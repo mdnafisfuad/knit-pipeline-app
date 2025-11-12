@@ -1,6 +1,10 @@
+# Tell pip to look at the special PyTorch CPU-only package index first
+--index-url https://download.pytorch.org/whl/cpu
+
+# Now list the packages. Pip will find the CPU version of torch here.
+torch
 Flask
 pandas
-torch
 scikit-learn
 numpy
 flask-cors
