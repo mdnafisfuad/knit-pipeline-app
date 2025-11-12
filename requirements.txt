@@ -1,7 +1,9 @@
-# Tell pip to look at the special PyTorch CPU-only package index first
---index-url https://download.pytorch.org/whl/cpu
+# This flag tells pip to ADD the PyTorch CPU index as a source,
+# without removing the main PyPI package index.
+--extra-index-url https://download.pytorch.org/whl/cpu
 
-# Now list the packages. Pip will find the CPU version of torch here.
+# Now, pip can find torch in the extra index, and all other
+# packages in the main index.
 torch
 Flask
 pandas
